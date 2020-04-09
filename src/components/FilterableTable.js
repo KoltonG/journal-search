@@ -6,6 +6,9 @@ import { jsx, css } from '@emotion/core';
 // Components
 import { Button } from "@chakra-ui/core";
 
+// Constants
+import { JOURNALS } from '../constants';
+
 const Header = ({ children }) => (
   <div css={css`
     margin-bottom: 2rem;
@@ -39,39 +42,11 @@ export const FilterableTable = () => {
     : setFilters([...filters, filter])
 
   /* Data */
-  const data = [
-    {
-      title: 'An Energy-Independent Pro-longevity Function of Triacylglycerol in Yeast',
-      summary: 'A correlation between high levels of TAG and longer Saccharomyces cerevisiae chronological lifespan was observed. . Increased TAG abundance through the deletion of TAG lipases prolonged chronological lifespan of laboratory strains, while diminishing TAG biosynthesis shortened lifespan without apparently affecting vegetative growth.',
-      link: 'https://drive.google.com/file/d/1wc9_p53iHNrRUC-Mj-QnZTSTtUqXPOKg/view?usp=sharing'
-    },
-    {
-      title: 'Fkh1 and Fkh2 associate with Sir2 to control CLB2 transcription under normal and oxidative stress conditions',
-      summary: 'Functional interplay between Fkh1/Fkh2 and Sir2 suggesting a novel mechanism of cell cycle repression. Thus, in budding yeast, not only the regulation of G2/M gene expression but also the protective response against stress could be directly coordinated by Fkh1 and Fkh2. Fkh1 and Fkh2 associate with Sir2 in G1 and M phase, and that Fkh1/Fkh2-mediated activation of reporter genes is antagonized by Sir2. Sir2 overexpression strongly affects cell growth in an Fkh1/Fkh2-dependent manner. Sir2 regulates the expression of the mitotic cyclin Clb2 through Fkh1/Fkh2-mediated binding to the CLB2 promoter in G1 and M phase. Sir2 is also enriched at the CLB2 promoter under stress conditions, and that the nuclear localization of Sir2 is dependent on Fkh1 and Fkh2',
-      link: 'https://drive.google.com/file/d/1Sism7K7S9vP2ImmnR7hi9q3yP__Admha/view?usp=sharing'
-    },
-    {
-      title: 'Fkh1 and Fkh2 associate with Sir2 to control CLB2 transcription under normal and oxidative stress conditions',
-      summary: 'Functional interplay between Fkh1/Fkh2 and Sir2 suggesting a novel mechanism of cell cycle repression. Thus, in budding yeast, not only the regulation of G2/M gene expression but also the protective response against stress could be directly coordinated by Fkh1 and Fkh2. Fkh1 and Fkh2 associate with Sir2 in G1 and M phase, and that Fkh1/Fkh2-mediated activation of reporter genes is antagonized by Sir2. Sir2 overexpression strongly affects cell growth in an Fkh1/Fkh2-dependent manner. Sir2 regulates the expression of the mitotic cyclin Clb2 through Fkh1/Fkh2-mediated binding to the CLB2 promoter in G1 and M phase. Sir2 is also enriched at the CLB2 promoter under stress conditions, and that the nuclear localization of Sir2 is dependent on Fkh1 and Fkh2',
-      link: 'https://drive.google.com/file/d/1Sism7K7S9vP2ImmnR7hi9q3yP__Admha/view?usp=sharing'
-    },
-    {
-      title: 'Fkh1 and Fkh2 associate with Sir2 to control CLB2 transcription under normal and oxidative stress conditions',
-      summary: 'Functional interplay between Fkh1/Fkh2 and Sir2 suggesting a novel mechanism of cell cycle repression. Thus, in budding yeast, not only the regulation of G2/M gene expression but also the protective response against stress could be directly coordinated by Fkh1 and Fkh2. Fkh1 and Fkh2 associate with Sir2 in G1 and M phase, and that Fkh1/Fkh2-mediated activation of reporter genes is antagonized by Sir2. Sir2 overexpression strongly affects cell growth in an Fkh1/Fkh2-dependent manner. Sir2 regulates the expression of the mitotic cyclin Clb2 through Fkh1/Fkh2-mediated binding to the CLB2 promoter in G1 and M phase. Sir2 is also enriched at the CLB2 promoter under stress conditions, and that the nuclear localization of Sir2 is dependent on Fkh1 and Fkh2',
-      link: 'https://drive.google.com/file/d/1Sism7K7S9vP2ImmnR7hi9q3yP__Admha/view?usp=sharing'
-    },
-    {
-      title: 'Fkh1 and Fkh2 associate with Sir2 to control CLB2 transcription under normal and oxidative stress conditions',
-      summary: 'Functional interplay between Fkh1/Fkh2 and Sir2 suggesting a novel mechanism of cell cycle repression. Thus, in budding yeast, not only the regulation of G2/M gene expression but also the protective response against stress could be directly coordinated by Fkh1 and Fkh2. Fkh1 and Fkh2 associate with Sir2 in G1 and M phase, and that Fkh1/Fkh2-mediated activation of reporter genes is antagonized by Sir2. Sir2 overexpression strongly affects cell growth in an Fkh1/Fkh2-dependent manner. Sir2 regulates the expression of the mitotic cyclin Clb2 through Fkh1/Fkh2-mediated binding to the CLB2 promoter in G1 and M phase. Sir2 is also enriched at the CLB2 promoter under stress conditions, and that the nuclear localization of Sir2 is dependent on Fkh1 and Fkh2',
-      link: 'https://drive.google.com/file/d/1Sism7K7S9vP2ImmnR7hi9q3yP__Admha/view?usp=sharing'
-    }
-  ];
-
-  const filteredData = filters.length
-    ? data.filter(row => filters.every(
+  const filteredJournals = filters.length
+    ? JOURNALS.filter(row => filters.every(
       currentFilter => row.summary.match(new RegExp(currentFilter, 'gi'))
     ))
-    : data;
+    : JOURNALS;
 
   return (
     <div css={css`
@@ -105,7 +80,7 @@ export const FilterableTable = () => {
         </Filter>
       </Header>
       <div css={css`
-        height: calc(100% - 200px);
+        margin-bottom: 2rem;
       `}>
         <table css={css`
           width: 100%;
@@ -129,7 +104,7 @@ export const FilterableTable = () => {
             <th>Link</th>
           </tr>
           {
-            filteredData.map(({title, summary, link}) => (
+            filteredJournals.map(({title, summary, link}) => (
               <tr>
                 <td>{title}</td>
                 <td>{summary}</td>
