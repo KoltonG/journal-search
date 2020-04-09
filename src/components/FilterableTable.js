@@ -44,7 +44,10 @@ export const FilterableTable = () => {
   /* Data */
   const filteredJournals = filters.length
     ? JOURNALS.filter(row => filters.every(
-      currentFilter => row.summary.match(new RegExp(currentFilter, 'gi'))
+      currentFilter =>
+        row.title.match(new RegExp(currentFilter, 'gi')) ||
+        row.species.match(new RegExp(currentFilter, 'gi')) ||
+        row.summary.match(new RegExp(currentFilter, 'gi'))
     ))
     : JOURNALS;
 
